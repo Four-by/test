@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro 3D Tire Wheel Menu</title>
+    <style>
+        /* Base page styling matching your red background constraint */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #05767C;
+            font-family: "Great Vibes", Courier, monospace;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            height: 50vh;
+            overflow: hidden;
+            user-select: none;
+            position: relative;
+        }
+
+        /* Styling for your logo on the top right */
+        .top-right-logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 500px;
+            height: auto;
+            z-index: 10;
+        }
+/* 3D Stage Container */
+.applet-container {
+        width: 400px;
+        height: 500px;
+        position: relative;
+        perspective: 1200px;
+        perspective-origin: 50% 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        /* LOWER THE WHEEL HERE */
+        margin-top: 140px; /* Adjusts the space above the wheel pushing it below the 90px high heading */
+}
+       
+
+        /* The rolling cylinder hub */
+        .wheel-hub {
+            position: relative;
+            width: 260px;
+            height: 150px;
+            transform-style: preserve-3d;
+            will-change: transform;
+            transition: transform 0.15s ease-out; /* Smooths out mouse snapping */
+        }
+
+        /* Individual license plate menu links */
+        .license-plate {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #05767C;
+            border: 3px solid #000;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+            color: #FF0000; /* Changed from White to Red */
+            font-weight: bold;
+            font-size: 32px;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            backface-visibility: visible;
+            transition: background-color 0.2s, color 0.2s, text-shadow 0.2s;
+            letter-spacing: 1px;
+            z-index: 5;
+            /* 3D Text Effect using multi-layered text shadows */
+            text-shadow: 
+                1px 1px 0px #000,
+                2px 2px 0px #111,
+                3px 3px 0px #222,
+                4px 4px 0px #333,
+                5px 5px 5px rgba(0,0,0,0.6);
+        }
+
+        .license-plate:hover {
+            background-color: #2BC3CF;
+            color: #FFFFFF; /* Kept white on hover to preserve contrast against the light blue */
+            /* Slight shift to make the 3D text "pop" more on hover */
+            text-shadow: 
+                1px 1px 0px #000,
+                2px 2px 0px #05484d,
+                3px 3px 0px #022b2e,
+                4px 4px 6px rgba(0,0,0,0.8);
+        }
+
+        /* Structural 3D Wheel Sides matching your theme colors */
+        .wheel-cap {
+            position: absolute;
+            width: 366px; /* Slightly larger than diameter (radius 180 * 2) to cap completely */
+            height: 366px;
+            top: 50%;
+            left: 50%;
+            margin-top: -183px;
+            margin-left: -183px;
+            border-radius: 50%;
+            border: 5px solid #000000;
+            box-shadow: 0 0 15px rgba(0,0,0,0.4);
+            /* Uses background color #05767C and item red #FF0000 for the geometric spokes */
+            background: 
+                radial-gradient(circle at center, #FF0000 0%, #000000 15%, #05767C 16%, transparent 26%),
+                repeating-conic-gradient(from 0deg, #05767C 0deg 20deg, #FF0000 20deg 25deg, #000000 25deg 27deg);
+            backface-visibility: visible;
+            pointer-events: none; /* Allows mouse clicks to pass cleanly through to license links */
+            z-index: 1;
+        }
+
+        /* Pushes left/right sides precisely past the edges of your 260px plates */
+        .cap-left {
+            transform: rotateY(90deg) translateZ(-132px);
+        }
+        .cap-right {
+            transform: rotateY(90deg) translateZ(132px);
+        }
+
+        h1 {
+            position: absolute;
+            top: 90px;
+            left: 47%; /* Push the left edge to the middle */
+            transform: translateX(-50%); /* Pull it back by half its width to center it */
+            width: max-content; /* Keeps the text from wrapping awkwardly */
+            margin: 0;
+            font-size: 70px;
+        }
+
+        /* Container for paragraphs placed below the 500px menu */
+        .content-container {
+            position: absolute;
+            top: 200px;
+            left: 575px;
+            width: 750px;
+            text-align: left; /* Centers the text inside */
+            color: #000000;
+            font-size: 24px;
+            z-index: 10;
+        }
+    </style>
+    <!-- Google Font stylesheet added for the "Great Vibes" handwriting effect to load properly -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+	
+	<style> .image-row { display: flex; justify-content: space-between; align-items: flex-end; height: 1200px; } .image-row img { max-width: 30%; } </style> 
+</head>
+<body>
+
+    <!-- Your logo placed above everything else on the right side -->
+    <img class="top-right-logo" src="logo3.jpg" alt="Website Logo">
+
+    <div class="applet-container" id="stage">
+        <div class="wheel-hub" id="hub">
+            <!-- Left and Right Colored Hub Sides -->
+            <div class="wheel-cap cap-left"></div>
+            <div class="wheel-cap cap-right"></div>
+
+            <!-- License Plate Links -->
+            <a href="index1.html" class="license-plate">Cars,Trucks & Bikes</a>
+            <a href="ages.html" class="license-plate">Over the years</a>
+            <a href="59f100.html" class="license-plate">59 F100 Ford</a>
+            <a href="motorcycles.html" class="license-plate">Motorcycles</a>
+            <a href="JD Fun.html" class="license-plate">JD Fun</a>
+            <a href="about.html" class="license-plate">About me</a>
+            <a href="85gmc.html" class="license-plate">1985 GMC</a>
+			<a href="RedB2.html" class="license-plate">Bronco 2 with Plow</a>
+        </div>
+    </div>
+
+    <h1>Welcome to my personal web pages:)</h1>
+
+    <!-- Your paragraph section placed below the menu -->
+    <div class="content-container">
+        <p style="font-family: 'Great Vibes', sans-serif; color: #000000; font-size: 40px;">
+            I recently discovered I enjoy creating web pages as much now, as I did years ago! I like experimenting with new styles, 
+            colors, effects and transitions etc. Although much has changed, since I built my first web site 18 years ago.
+        </p>
+    </div>
+
+    <script>
+        const stage = document.getElementById('stage');
+        const hub = document.getElementById('hub');
+        const plates = document.querySelectorAll('.license-plate');
+        const totalPlates = plates.length;
+
+        const radius = 180;
+        let currentRotation = 0;
+        let sideTilt = 0;
+
+        const baseSpeed = 0.75;
+        let targetSpeed = baseSpeed;
+        let isDragging = false;
+        let isHovered = false;
+
+        let startY = 0;
+
+        function layoutWheel() {
+            plates.forEach((plate, index) => {
+                const angle = (360 / totalPlates) * index;
+                plate.style.transform = `rotateX(${angle}deg) translateZ(${radius}px)`;
+            });
+        }
+
+        function updateRotation() {
+            if (!isDragging && !isHovered) {
+                currentRotation += targetSpeed;
+            }
+            hub.style.transform = `rotateY(${sideTilt}deg) rotateX(${-currentRotation}deg)`;
+            requestAnimationFrame(updateRotation);
+        }
+
+        stage.addEventListener('mousemove', (e) => {
+            // 1. PERFECT HOVER DETECTION
+            if (e.target.classList.contains('license-plate') || e.target.closest('.license-plate')) {
+                isHovered = true;
+            } else {
+                isHovered = false;
+            }
+
+            const rect = stage.getBoundingClientRect();
+            const containerCenterX = rect.left + (rect.width / 2);
+            const containerCenterY = rect.top + (rect.height / 2);
+            
+            const deltaX = (e.clientX - containerCenterX) / (rect.width / 2);
+            sideTilt = deltaX * 55;
+
+            if (e.clientY > containerCenterY) {
+                targetSpeed = -baseSpeed;
+            } else {
+                targetSpeed = baseSpeed;
+            }
+
+            if (!isDragging) return;
+            const deltaY = e.clientY - startY;
+            currentRotation += deltaY * 0.4;
+            startY = e.clientY;
+        });
+
+        stage.addEventListener('mouseleave', () => {
+            sideTilt = 0;
+            targetSpeed = baseSpeed;
+            isHovered = false;
+        });
+
+        window.addEventListener('mousedown', (e) => {
+            if (!stage.contains(e.target)) return;
+            isDragging = true;
+            startY = e.clientY;
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        layoutWheel();
+        updateRotation();
+    </script>
+	<!-- PLACE THE HTML CONTAINER CODE HERE -->
+<!-- FIRST ROW OF IMAGES --> 
+<div class="image-row">  
+    <img src="pulp load.jpg" alt="Lower Left">  
+    <img src="bakingcookies.jpg" alt="Center">  
+    <img src="CandCo.jpg" alt="Lower Right"> 
+    <img src="cabin.jpg" alt="Lower Right">  
+</div>
+
+
+
+
+
+</body>
+</html>
