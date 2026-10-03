@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html>
+
+<head><title>Bikes</title>
+ <meta charset="UTF-8">
+    <style>
+        /* This makes the clock background transparent */
+        body {
+            margin: 0;
+            padding: 0;
+            background: 9c9c92; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #time {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #000000; /* 💡 Change to #000000 if your webpage has a white background */
+            line-height: 1.1;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+
+        #date {
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: #000000;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+
+<body bgcolor="#9c9c92">
+
+
+ <div id="time">00:00:00 AM</div>
+    <div id="date">Loading Date...</div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            
+            hours = hours % 12;
+            hours = hours ? hours : 12; 
+            hours = String(hours).padStart(2, '0');
+
+            document.getElementById('time').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
+
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('date').textContent = now.toLocaleDateString('en-US', options);
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
+
+
+<Center><img align="middle" src="05nomad.jpg"  width="640" height="476" alt=""/>
+
+<font color="#000000" face="Monotype Corsiva" size="+3">
+
+<p> This is a 2005 Nomad, and represents the last repairable motorcycle I bought. I mostly made repairs to the headlight, front fender, replaced the windshield, and added accessories. I sold it to a lady in Prescott, Wi., she bought it for her husbands birthday.
+</font>
+
+<P><P><P><CENTER><FONT size=+2 color="#FFFFFF"><A HREF="Motorcycles.html">Back</A></FONT>
+
+</body></html>
